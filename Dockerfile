@@ -16,8 +16,17 @@ ENV JENKINS_HOME /var/jenkins_home
 ENV JENKINS_FOLDER /usr/share/jenkins/
 ENV JAVA_HOME "/usr/lib/jvm/java-7-openjdk-amd64"
 
-RUN apt-get update
-RUN apt-get install -y git python zip curl default-jre jq
+# Add mesos
+
+# Setup
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv E56151BF
+ENV DISTRO=$(lsb_release -is | tr '[:upper:]' '[:lower:]')
+ENV CODENAME=$(lsb_release -cs)
+
+RUN echo "deb http://repos.mesosphere.com/${DISTRO} ${CODENAME} main" | sudo tee /etc/apt/sources.list.d/mesosphere.list
+
+RUN apt-get -y update
+RUN apt-get install -y git python zip curl default-jre jq mesos
 
 RUN mkdir -p /var/log/nginx/jenkins
 COPY conf/nginx/nginx.conf /etc/nginx/nginx.conf
