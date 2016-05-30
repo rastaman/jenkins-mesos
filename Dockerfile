@@ -21,7 +21,7 @@ ENV CODENAME jessie
 # Add mesos
 
 # Setup
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv E56151BF
+#RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv E56151BF
 
 RUN echo "deb http://repos.mesosphere.com/${DISTRO} ${CODENAME} main" | sudo tee /etc/apt/sources.list.d/mesosphere.list
 
