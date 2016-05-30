@@ -15,13 +15,13 @@ ENV JENKINS_STAGING /var/jenkins_staging
 ENV JENKINS_HOME /var/jenkins_home
 ENV JENKINS_FOLDER /usr/share/jenkins/
 ENV JAVA_HOME "/usr/lib/jvm/java-7-openjdk-amd64"
+ENV DISTRO debian
+ENV CODENAME jessie
 
 # Add mesos
 
 # Setup
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv E56151BF
-ENV DISTRO $(lsb_release -is | tr '[:upper:]' '[:lower:]')
-ENV CODENAME $(lsb_release -cs)
 
 RUN echo "deb http://repos.mesosphere.com/${DISTRO} ${CODENAME} main" | sudo tee /etc/apt/sources.list.d/mesosphere.list
 
