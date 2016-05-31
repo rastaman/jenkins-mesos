@@ -27,6 +27,8 @@ RUN echo "deb http://repos.mesosphere.com/${DISTRO} ${CODENAME} main" | tee /etc
 
 RUN apt-get -y update
 RUN apt-get install -y git python zip curl default-jre jq mesos
+RUN echo manual > /etc/init/mesos-slave.override
+RUN echo manual > /etc/init/mesos-master.override
 
 RUN mkdir -p /var/log/nginx/jenkins
 COPY conf/nginx/nginx.conf /etc/nginx/nginx.conf
